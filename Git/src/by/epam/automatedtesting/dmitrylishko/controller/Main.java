@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         String fileName = "./resources/students.txt";
-        Group group = CreateGroup.create("group 2", Read.readFromFile(fileName));
+        Group group = CreateGroup.create("Dead", Read.readFromFile(fileName));
         System.out.println("Average mark of " + group.getName() + ": " + averageMark(group));
     }
 }
