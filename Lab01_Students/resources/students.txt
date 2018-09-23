@@ -6,3 +6,4 @@ Tomas Edison 5 4 5 4 4 5 4 6 6 4 4
 Albert Einstein 8 5 4 5 4 5
 Another Guy 2 1 2 1 2 1 1 2 2 1
 Strange Man 5 5 4 5 4 4 9 7 8
+Jane Foster 10 10 10 10
