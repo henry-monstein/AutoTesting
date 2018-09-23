@@ -3,3 +3,4 @@ Nikola Tesla 7 8 7 9 9 9 10 9 7 9 9
 Tomas Edison 5 4 5 4 4 5 4 6 6 4 4
 Albert Einstein 8 5 4 5 4 5
 Megan Fox 9 5 4 6 4 6 6 4
+Kurt Cobain 5 4 10 10 10 6 4 6
