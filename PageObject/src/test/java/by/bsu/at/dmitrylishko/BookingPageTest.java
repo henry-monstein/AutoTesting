@@ -41,4 +41,97 @@ public class BookingPageTest {
         String expectedErr = "Departing FROM and TO must be different!";
         assertEquals(expectedErr, form.getTextAlert());
     }
+
+    @Test
+    public void passengerAbsenceTest() {
+        form.removeAdult();
+        String expectedErr = "Please select passengers!";
+        assertEquals(expectedErr, form.getTextAlert());
+    }
+
+    @Test
+    public void babiesMoreThanAdultsTest() {
+        form.addBaby();
+        form.removeAdult();
+        String expectedErr = "Number of infants cannot be higher then number of adult passengers!";
+        assertEquals(expectedErr, form.getTextAlert());
+    }
+
+    @Test
+    public void maximumNumberOfPassengersTest() {
+        try {
+            while (true) {
+                form.addAdult();
+                form.addChild();
+            }
+        } catch (UnhandledAlertException e) {
+            String expectedErr = "Maximal number of passengers has been exceeded! " +
+                    "Your booking can be made for maximum 9 passengers.";
+            assertEquals(expectedErr, form.getTextAlert());
+
+        }
+    }
+
+    @Test
+    public void childCannotTravelAloneTest() {
+        form.addChild();
+        form.removeAdult();
+        String expectedErr = "Children cannot travel alone!";
+        assertEquals(expectedErr, form.getTextAlert());
+    }
+
+    @Test
+    public void previousDataUnselectableTest() {
+        form.clickCalendar(0);
+        form.setDepartureDate(14);
+        form.clickCalendar(1);
+        assertTrue(form.isPrivousDataUnselectable(14));
+    }
+
+    @Test
+    public void diffCurrencyTest() {
+        form.setDeparture("PRG");
+        form.setArrival("AMS");
+        form.oneWay();
+        form.openSaleLocations();
+        form.setSaleLocation("RU");
+        form.clickSubmit("next");
+        String expectedCurrency = "RUB";
+        assertEquals(expectedCurrency, form.getDiffCurrency());
+    }
+
+    @Test
+    public void totalAmountChangingTest() {
+        form.setDeparture("PRG");
+        form.setArrival("AMS");
+        form.oneWay();
+        form.openSaleLocations();
+        form.setSaleLocation("DE");
+        form.clickSubmit("next");
+        form.setFlight();
+        form.setRate("fp_standard");
+        double a = form.getTotalPrice();
+        form.setRate("fp_flexi");
+        double b = form.getTotalPrice();
+        assertNotEquals(a, b);
+    }
+
+    @Test
+    public void emptyFinalFormTest() {
+        form.setDeparture("PRG");
+        form.setArrival("AMS");
+        form.oneWay();
+        form.openSaleLocations();
+        form.setSaleLocation("DE");
+        form.clickSubmit("next");
+        form.setFlight();
+        form.setRate("fp_standard");
+        form.clickSubmit("next");
+        form.clickSubmit("next");
+        form.clickSubmit("confirm");
+        String expectedAlert = "Please fill in firstname for passenger number 1";
+        assertEquals(expectedAlert, form.getTextAlert());
+    }
+
+
 }
