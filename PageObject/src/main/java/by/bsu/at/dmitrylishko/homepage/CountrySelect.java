@@ -15,6 +15,7 @@ public class CountrySelect {
     }
 
     public void setLanguage(String language) {
+        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(driver.findElement(By.partialLinkText(language))));
         driver.findElement(By.partialLinkText(language)).click();
     }
 }
