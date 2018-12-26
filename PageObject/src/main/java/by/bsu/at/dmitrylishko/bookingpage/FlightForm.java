@@ -3,6 +3,8 @@ package by.bsu.at.dmitrylishko.bookingpage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -75,17 +77,13 @@ public class FlightForm {
         }
     }
 
-    private void sleep() {
+    public void clickCalendar(int i) {
+        driver.findElement(By.id("fsfCalendar" + i)).click();
         try {
-            Thread.sleep(1000);
+            Thread.sleep(550);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    public void clickCalendar(int i) {
-        driver.findElement(By.id("fsfCalendar" + i)).click();
-        sleep();
     }
 
     public void setDepartureDate(int date) {
@@ -118,11 +116,14 @@ public class FlightForm {
     }
 
     public void setRate(String rate) {
+        new WebDriverWait(driver,5)
+                .until(ExpectedConditions.visibilityOf(driver.findElement(By.className(rate))));
         driver.findElement(By.className(rate)).click();
-        sleep();
     }
 
     public double getTotalPrice() {
+        while (!(driver.findElement(By
+                .className("okPlusMiles_0_db7c0b360ddb578d216afee0b516403e_2019-01-14")).getText().equals("150")));
         return Double.valueOf(driver.findElement(By.id("totalAmount2")).getText().split(" ")[0]);
     }
 }

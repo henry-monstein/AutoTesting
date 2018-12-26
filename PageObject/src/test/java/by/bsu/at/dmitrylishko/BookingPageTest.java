@@ -30,7 +30,6 @@ public class BookingPageTest {
     public void tearDownChromeDriverQuit() {
         form = null;
         driver.quit();
-        driver = null;
     }
 
     @Test
@@ -105,6 +104,8 @@ public class BookingPageTest {
         form.setDeparture("PRG");
         form.setArrival("AMS");
         form.oneWay();
+        form.clickCalendar(0);
+        form.setDepartureDate(14);
         form.openSaleLocations();
         form.setSaleLocation("DE");
         form.clickSubmit("next");
@@ -121,6 +122,8 @@ public class BookingPageTest {
         form.setDeparture("PRG");
         form.setArrival("AMS");
         form.oneWay();
+        form.clickCalendar(0);
+        form.setDepartureDate(14);
         form.openSaleLocations();
         form.setSaleLocation("DE");
         form.clickSubmit("next");
